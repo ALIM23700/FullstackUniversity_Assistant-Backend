@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const { uploadResource, getResources, downloadResource } = require("../controllers/resource.controller");
+const verifyToken = require("../middleware/authMiddleware");
 
 const router4 = express.Router();
 
@@ -15,8 +16,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-router4.post("/upload",  upload.single("file"), uploadResource);
-router4.get("/get",  getResources);
-router4.get("/download/:filename", downloadResource);
+router4.post("/upload",  upload.single("file"),verifyToken, uploadResource);
+router4.get("/getresource",verifyToken(),  getResources);
+router4.get("/download/:filename",verifyToken(), downloadResource);
 
 module.exports = router4;
