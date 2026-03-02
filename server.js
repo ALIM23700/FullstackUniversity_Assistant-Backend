@@ -2,7 +2,7 @@ const app=require("./app")
 const dotenv=require("dotenv")
 dotenv.config()
 
-require("../Backend/models/model.db")
+require("./models/model.db")
 const PORT=process.env.PORT
 
 app.listen(PORT,()=>{
